@@ -34,11 +34,11 @@
 
                 <div class="row">
 
-                    <div id="contacs_list" class="col-4 bg-light px-0">
+                    <div class="col-4 bg-light px-0">
 
                         <div id="my_account" class="p-2 focused_account d-flex justify-content-between">
 
-                            <div class="topcard_left_info d-flex align-items-center gap-2">
+                            <div class="left_info d-flex align-items-center gap-2">
                                 <img src="./img/avatar_io.jpg" alt="my_account">
                                 <span class="name">Sofia</span>
                             </div>
@@ -47,6 +47,27 @@
                                 <i class="fa-solid fa-circle-notch"></i>
                                 <i class="fa-solid fa-message"></i>
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+
+                        </div>
+
+                        <div id="contacs_list">
+
+                            <div
+                            v-for="(contact, contactIndex) in contacts"
+                            class="contact border-top p-2 d-flex justify-content-between">
+            
+                                <div class="left_info d-flex align-items-center gap-2">
+                                    <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
+                                    <div class="d-flex flex-column">
+                                        <div class="name">{{ contact.name }}</div>
+                                        <div>Ultimo messaggio inviato</div>
+                                    </div>
+                                </div>
+
+                                <div class="last_message_time">
+                                    12.00
+                                </div>
                             </div>
 
                         </div>

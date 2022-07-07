@@ -2,6 +2,7 @@ const app = new Vue(
     {
         el: '#app',
         data:{
+            activeElement: 0,
             contacts: [
                 {
                     name: 'Michele',
@@ -167,5 +168,17 @@ const app = new Vue(
             ]
             
         },
+        methods:{
+
+            imageToGo: function(elementToGo){
+
+                return './img/avatar' + elementToGo + '.jpg'
+
+            },
+
+            altForImages: function(elementToGo){
+                return 'avatar' + elementToGo
+            }
+        }
     },
 )
