@@ -45,6 +45,10 @@ img{
     height: 100%;
 }
 
+img, i, .name{
+    cursor: pointer;
+}
+
 .topcard_left_info img{
     border-radius: 50%;
     object-fit: cover;
@@ -59,3 +63,12 @@ img{
     background-image: url(../img/mine.jpg);
 }
 
+#my_message{
+    height: 3.5rem;
+    width: 100%;
+    background-color: #F3EEEA;
+}
+
+#my_message i{
+    font-size: 1.4rem;
+}
