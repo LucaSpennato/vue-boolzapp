@@ -70,9 +70,7 @@ img, i, .name{
 }
 
 .selected_contact{
-
-    background-color: darkgray;
-
+    background-color: lightgray;
 }
 
 /* right layout */

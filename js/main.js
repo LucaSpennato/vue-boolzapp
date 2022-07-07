@@ -171,14 +171,17 @@ const app = new Vue(
         methods:{
 
             imageToGo: function(elementToGo){
-
-                return './img/avatar' + elementToGo + '.jpg'
-
+                return './img/avatar' + elementToGo + '.jpg';
             },
 
             altForImages: function(elementToGo){
-                return 'avatar' + elementToGo
-            }
+                return 'avatar' + elementToGo;
+            },
+
+            selectContactOnClick: function(contactIndex){
+                this.activeElement = contactIndex;
+            },
+
         }
     },
 )

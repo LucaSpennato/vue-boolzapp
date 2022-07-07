@@ -55,6 +55,8 @@
 
                             <div
                             v-for="(contact, contactIndex) in contacts"
+                            :class="{'selected_contact' : contactIndex === activeElement}"
+                            @click="selectContactOnClick(contactIndex)"
                             class="contact border-top p-2 d-flex justify-content-between">
             
                                 <div class="left_info d-flex align-items-center gap-2">
