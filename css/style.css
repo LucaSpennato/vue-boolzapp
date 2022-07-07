@@ -73,7 +73,7 @@ img, i, .name, .cursor_pointer{
 
 /* TODO: OVERFLOW */
 #contacs_list{
-    /* height: 50vh; */
+    height: 50vh;
     overflow-y: scroll; 
 }
 
@@ -128,6 +128,8 @@ img, i, .name, .cursor_pointer{
 
 /* TODO: SCROLL */
 #current_contact_messages{
-    height: calc(100% - 3.5rem);
+    min-height: 20rem;
+    max-height: 34rem;
+    height: 75vh;
     overflow-y: scroll;
 }
