@@ -1,14 +1,16 @@
 :root{
-    --bgfix-lightgray: #EAEAEA;
+    --bgMain: #DADBD3;
     --bgMain-top: #009688;
-    --bgMain-bottom: #DADBD3;
+    --bgfix-lightgray: #EAEAEA;
 }
 
 /* common custom prop */
+body{
+    background-color: var(--bgMain);
+}
 
 #app.main_wrapper{
     width: 100%;
-    height: 100vh;
     position: relative;
 }
 
@@ -17,15 +19,11 @@
     background-color: var(--bgMain-top);
 }
 
-.main_wrapper > .bottom_backgroung{
-    height: calc(100vh -  10rem );
-    background-color: var(--bgMain-bottom);
-}
 
 .main_wrapper > #screen-app{
     min-height: 15rem;
-    max-height: 90%;
-    height: 90%;
+    max-height: 90vh;
+    height: 90vh;
     position: absolute;
     top: 0;
     right: 50%;
@@ -41,7 +39,7 @@ img{
 }
 
 /* common classes for both sides contacts infos */
-img, i, .name{
+img, i, .name, .cursor_pointer{
     cursor: pointer;
 }
 
@@ -75,12 +73,11 @@ img, i, .name{
 
 /* TODO: OVERFLOW */
 #contacs_list{
-    /* height: 85vh; */
+    /* height: 50vh; */
     overflow-y: scroll; 
 }
 
 /* right layout */
-
 #chat_page{
     background-image: url(../img/mine.jpg);
 }
@@ -93,6 +90,21 @@ img, i, .name{
 
 #my_message i{
     font-size: 1.4rem;
+}
+
+#notifications{
+    background-color: #8EDAFC;
+}
+#bell-container{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    color: #8EDAFC;
 }
 
 .received_message{
@@ -114,6 +126,7 @@ img, i, .name{
     padding: 1rem;
 }
 
+/* TODO: SCROLL */
 #current_contact_messages{
     height: calc(100% - 3.5rem);
     overflow-y: scroll;
