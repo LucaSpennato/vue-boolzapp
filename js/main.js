@@ -182,6 +182,13 @@ const app = new Vue(
                 this.activeElement = contactIndex;
             },
 
+            cleanDate: function(element){
+
+                let cleanedDate = element.slice(11,-3);
+                return cleanedDate;
+
+            }
+
         }
     },
 )
