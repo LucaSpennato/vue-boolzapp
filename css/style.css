@@ -1,5 +1,7 @@
 :root{
     --bgfix-lightgray: #EAEAEA;
+    --bgMain-top: #009688;
+    --bgMain-bottom: #DADBD3;
 }
 
 /* common custom prop */
@@ -12,12 +14,12 @@
 
 .main_wrapper > .top_background{
     height: 10rem;
-    background-color: #009688;
+    background-color: var(--bgMain-top);
 }
 
 .main_wrapper > .bottom_backgroung{
     height: calc(100vh -  10rem );
-    background-color: #DADBD3;
+    background-color: var(--bgMain-bottom);
 }
 
 .main_wrapper > #screen-app{
@@ -34,26 +36,26 @@
     height: 100%;
 }
 
-/* left layout */
-#my_account{
-    height: 3rem;
+.focused_account{
+    height: 3.5rem;
     background-color: var(--bgfix-lightgray);
 }
 
-
-#my_account img{
-    border-radius: 50%;
-    object-fit: cover;
+img{
     height: 100%;
 }
 
+.topcard_left_info img{
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* left layout */
+
+
 /* right layout */
 
-/* #contact_messages{
-    padding: 0;
-} */
-
-#contact_messages{
+#current_messages{
     background-image: url(../img/mine.jpg);
 }
 
