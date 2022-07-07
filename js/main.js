@@ -183,12 +183,10 @@ const app = new Vue(
             },
 
             cleanDate: function(element){
-
                 let cleanedDate = element.slice(11,-3);
                 return cleanedDate;
+            },
 
-            }
-
-        }
+        },
     },
 )
