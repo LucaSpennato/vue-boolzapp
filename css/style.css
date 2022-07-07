@@ -64,13 +64,19 @@ img, i, .name{
     font-weight: 500;
 }
 
-.contact .left_info .flex-column div:last-child, .last_message_time{
+.contact .left_info .flex-column div:last-child, .message_time{
     color: gray;
     font-size: .7rem;
 }
 
 .selected_contact{
     background-color: lightgray;
+}
+
+/* TODO: OVERFLOW */
+#contacs_list{
+    /* height: 85vh; */
+    overflow-y: scroll; 
 }
 
 /* right layout */
@@ -87,4 +93,28 @@ img, i, .name{
 
 #my_message i{
     font-size: 1.4rem;
+}
+
+.received_message{
+    width: 40%;
+    border-radius: .5rem;
+    background-color: white;
+    overflow-wrap: break-word;
+}
+
+.sent_message{
+    width: 40%;
+    border-radius: .5rem;
+    background-color: #D5F9BA;
+    overflow-wrap: break-word;
+    align-self: flex-end;
+}
+
+.received_message > div, .sent_message > div{
+    padding: 1rem;
+}
+
+#current_contact_messages{
+    height: calc(100% - 3.5rem);
+    overflow-y: scroll;
 }
