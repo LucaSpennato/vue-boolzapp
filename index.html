@@ -78,11 +78,11 @@
 
                     <div id="current_messages" class="col-8 p-0 d-flex flex-column justify-content-between border-start border-2">
 
-                        <div id="current_contact" class="p-2 focused_account d-flex justify-content-between">
+                        <div class="p-2 focused_account d-flex justify-content-between">
 
-                            <div class="topcard_left_info d-flex align-items-center gap-2">
-                                <img src="./img/avatar_io.jpg" alt="my_account">
-                                <span class="name">Sofia</span>
+                            <div class="left_info d-flex align-items-center gap-2">
+                                <img :src="imageToGo(contacts[activeElement].avatar)" :alt="altForImages(contacts[activeElement].avatar)">
+                                <span class="name">{{ contacts[activeElement].name }}</span>
                             </div>
 
                             <div class="right_info d-flex align-items-center gap-3 me-2 text-secondary">
