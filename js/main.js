@@ -3,6 +3,7 @@ const app = new Vue(
         el: '#app',
         data:{
             activeElement: 0,
+            newMessage: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -186,6 +187,27 @@ const app = new Vue(
                 let cleanedDate = element.slice(11,-3);
                 return cleanedDate;
             },
+
+            pushNewMessage: function(){
+
+                // this.newMessage.trim();
+
+                if(this.newMessage === ''){
+
+                }else if(this.newMessage === ' '){
+
+                } else{
+                    this.contacts[this.activeElement].messages.push({
+                        date: '10/01/2020 15:51:00',
+                        message: this.newMessage,
+                        status: 'sent'
+                    }); 
+
+                }
+
+
+                this.newMessage = '';
+            }
 
         },
     },

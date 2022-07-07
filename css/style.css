@@ -111,14 +111,12 @@ img, i, .name, .cursor_pointer{
     width: 40%;
     border-radius: .5rem;
     background-color: white;
-    overflow-wrap: break-word;
 }
 
 .sent_message{
     width: 40%;
     border-radius: .5rem;
     background-color: #D5F9BA;
-    overflow-wrap: break-word;
     align-self: flex-end;
 }
 
@@ -132,4 +130,9 @@ img, i, .name, .cursor_pointer{
     max-height: 34rem;
     height: 75vh;
     overflow-y: scroll;
+}
+
+
+.word_break_fix{
+    word-break: break-word;
 }
