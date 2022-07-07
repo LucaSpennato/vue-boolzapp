@@ -184,6 +184,9 @@ const app = new Vue(
             },
 
             cleanDate: function(element){
+
+                // TODO: Prova ad usare .filter (resituiva un array giusto?), forse alleggerisco il codice con questo!
+
                 let cleanedDate = element.slice(11,-3);
                 return cleanedDate;
             },

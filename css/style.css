@@ -19,7 +19,6 @@ body{
     background-color: var(--bgMain-top);
 }
 
-
 .main_wrapper > #screen-app{
     min-height: 15rem;
     max-height: 90vh;
@@ -36,6 +35,10 @@ body{
 
 img{
     height: 100%;
+}
+
+.word_break_fix{
+    word-break: break-word;
 }
 
 /* common classes for both sides contacts infos */
@@ -130,9 +133,4 @@ img, i, .name, .cursor_pointer{
     max-height: 34rem;
     height: 75vh;
     overflow-y: scroll;
-}
-
-
-.word_break_fix{
-    word-break: break-word;
 }
