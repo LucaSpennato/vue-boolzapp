@@ -213,9 +213,8 @@ const app = new Vue(
             botReply: function(){
 
                 let reply;
-                let message;
-                message = this.newMessage.toLowerCase();
-
+                let message = this.newMessage.toLowerCase();
+               
                 if(message === 'ciao'){
                     reply = 'Ciao!';
                 } else if(message === 'usciamo?'){
