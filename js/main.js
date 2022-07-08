@@ -236,10 +236,12 @@ const app = new Vue(
                 
             }
 
-
         },
     },
 )
+
+// TODO: Ricorda di aggiungere la libreria delle date!!!!
+
 /**
  * !Idea ricerca
  * creo la variabile che prenderà la stringa dal cerca
@@ -252,6 +254,9 @@ const app = new Vue(
  * (se while, per non rendere infinito il ciclo
  *  la condizione di uscita sarà quando hai fatto
  *  scorrere tutta la lunghezza dell'array senza trovarlo)
+ * 
+ * !aggiungi la formattazzione delle stringhe, 
+ * !usa il keayleave per azionare la ricerca ad ogni pressione
  * 
  * se lo trova, cambio l'activeIndex con il numero dell'iterazione
  * che dovrebbe corrispondere alla posizione del nome nell'array durante la ricerca (iterazione del ciclo)
