@@ -265,7 +265,11 @@ const app = new Vue(
             },
 
             latestMsg: function(array){             
-                return array[array.length-1].message
+                return array[array.length-1].message;
+            },
+
+            latestDate: function(array){
+                return this.cleanDate(array[array.length-1].date);
             },
 
             timeNow: function(){
