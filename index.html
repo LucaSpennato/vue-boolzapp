@@ -87,7 +87,7 @@
                                     <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
                                     <div class="d-flex flex-column">
                                         <div class="name">{{ contact.name }}</div>
-                                        <div>Ultimo messaggio inviato</div>
+                                        <div>{{ latestMsg(contact.messages) }}</div>
                                     </div>
                                 </div>
 

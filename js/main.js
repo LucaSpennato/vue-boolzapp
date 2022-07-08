@@ -171,7 +171,6 @@ const app = new Vue(
 
         },
         methods: {
-
             imageToGo: function (elementToGo) {
                 return './img/avatar' + elementToGo + '.jpg';
             },
@@ -263,6 +262,10 @@ const app = new Vue(
                 for (let i = 0; i < this.contacts.length; i++) {
                     this.contacts[i].visible = true;
                 };
+            },
+
+            latestMsg: function(array){             
+                return array[array.length-1].message
             },
 
             timeNow: function(){
