@@ -192,11 +192,9 @@ const app = new Vue(
             },
 
             pushNewMessage: function(){
-                
-                this.newMessage.trim();
-                let spacesCheck;
-
-                if( spacesCheck = this.newMessage.trim().length === 0){
+  
+                let spacesCheck = this.newMessage.trim();
+                if( spacesCheck.length === 0){
 
                 } else{
                     this.contacts[this.activeElement].messages.push({
@@ -206,7 +204,6 @@ const app = new Vue(
                     }); 
                     this.botReply();
                 }
-
                 this.newMessage = '';
             },
 
@@ -215,7 +212,7 @@ const app = new Vue(
                 let reply;
                 let message = this.newMessage.toLowerCase();
                
-                if(message === 'ciao'){
+                if(message === 'ciao' || message === 'ciao!'){
                     reply = 'Ciao!';
                 } else if(message === 'usciamo?'){
                     reply = 'Non sto molto bene, scusami!';
@@ -270,4 +267,8 @@ const app = new Vue(
  * prendo l'iterazione associata all'array col cerca, 
  * e creo un class con condizione indexRicerca (o se modifico activeElement prendo questo)
  * e gli dico che {'active' : indexRicerca(o activeElement) === contactIndex}
+ * ! con v-if potrei far vedere solo quelli che mi interessano cancellando del tutto 
+ * 
+ * ! idea step-2 solo se funzia la ricerca, activeElement diventa 'searching', 
+ * !facendo vedere solo determinate cose volendo
  */
