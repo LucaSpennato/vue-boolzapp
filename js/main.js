@@ -192,12 +192,11 @@ const app = new Vue(
             },
 
             pushNewMessage: function(){
+                
+                this.newMessage.trim();
+                let spacesCheck;
 
-                // this.newMessage.trim();
-
-                if(this.newMessage === ''){
-
-                }else if(this.newMessage === ' '){
+                if( spacesCheck = this.newMessage.trim().length === 0){
 
                 } else{
                     this.contacts[this.activeElement].messages.push({
