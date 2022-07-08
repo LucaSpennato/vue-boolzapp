@@ -235,30 +235,29 @@ const app = new Vue(
             searchInput: function () {
 
                 let spacesCheck = this.search.trim();
-                if (spacesCheck.length === 0){
+                if (spacesCheck.length === 0) {
                 } else {
-
                     let correctedSearch = this.stringAdjustment(this.search);
 
                     let isFound = false;
                     let i = 0;
-
+              
                     while (isFound === false) {
-
                         let wordToSearch = this.contacts[i].name.includes(correctedSearch);
-
+                        
                         if (wordToSearch === true) {
-                            console.log('cè')
                             isFound = true;
+                            this.contacts[i].visible = true;
+                            console.log(this.contacts[i].visible);
                         } else {
-                            console.log('nope')
+                            this.contacts[i].visible = false;
+                            console.log(this.contacts[i].visible);
                         }
 
                         i++
                     }
 
                 }
-
 
             },
 
