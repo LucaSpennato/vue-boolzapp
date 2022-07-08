@@ -236,80 +236,27 @@ const app = new Vue(
 
                 let spacesCheck = this.search.trim();
                 if (spacesCheck.length === 0) {
-                } else {
-                    let correctedSearch = this.stringAdjustment(this.search);
-
-                    let isFound = false;
-                    let i = 0;
-              
-                    while (isFound === false) {
-                        let wordToSearch = this.contacts[i].name.includes(correctedSearch);
-                        
-                        if (wordToSearch === true) {
-                            isFound = true;
-                            this.contacts[i].visible = true;
-                            console.log(this.contacts[i].visible);
-                        } else {
-                            this.contacts[i].visible = false;
-                            console.log(this.contacts[i].visible);
-                        }
-
-                        i++
+                    // se ci sono solo spazi, magari tornando indietro
+                    // pulisce resetta la ricerca mettendo tutti in true!!
+                    for(let i = 0;i < this.contacts.length; i++ ){
+                        this.contacts[i].visible = true;
                     }
+                } else {
+                    for(let i = 0;i < this.contacts.length; i++ ){
+
+                        let lower = this.contacts[i].name.toLowerCase();
+                        if(lower.includes(spacesCheck.toLowerCase())){
+                            this.contacts[i].visible = true;
+                        }else{
+                            this.contacts[i].visible = false;
+                        }
+                    };
 
                 }
 
             },
-
-            // return a string in lowercase w/first word capitalized
-            stringAdjustment: function (stringToAdj) {
-                stringToAdj = stringToAdj.toLowerCase();
-                return stringToAdj.charAt(0).toUpperCase() + stringToAdj.slice(1);
-            },
-
         },
     },
 )
 
 // TODO: Ricorda di aggiungere la libreria delle date!!!!
-
-/**
- * !Idea ricerca
- * creo la variabile che prenderà la stringa dal cerca
- * creo una funzione dove prima tolgo gli spazi alla stringa
- * metto tutti i caratteri in piccolo, rendo grande solo il primo 
- * 
- * itero in un for o se si può in un while
- * cerco nell'array per nome, se il while mi restituisce un index allora uso il while
- * 
- * (se while, per non rendere infinito il ciclo
- *  la condizione di uscita sarà quando hai fatto
- *  scorrere tutta la lunghezza dell'array senza trovarlo)
- * 
- * !aggiungi la formattazzione delle stringhe, 
- * !usa il keayup per azionare la ricerca ad ogni pressione
- * 
- * se lo trova, cambio l'activeIndex con il numero dell'iterazione
- * che dovrebbe corrispondere alla posizione del nome nell'array durante la ricerca (iterazione del ciclo)
- * 
- * essendo cambiato l'active la chat dovrebbe popparmi sulla destra
- * ma come lo dico a sinistra?
- * 
- * dovrei in qualche modo dire alla condizione della classe nella lista laterale
- * che ora il valore è diverso
- * 
- * 
- * prendo l'iterazione associata all'array col cerca, 
- * e creo un class con condizione indexRicerca (o se modifico activeElement prendo questo)
- * e gli dico che {'active' : indexRicerca(o activeElement) === contactIndex}
- * ! con v-if potrei far vedere solo quelli che mi interessano cancellando del tutto 
- * 
- * ! idea step-2 solo se funzia la ricerca, activeElement diventa 'searching', 
- * !facendo vedere solo determinate cose volendo
- */
-
-/**
- * keyup, alla ricerca con while cambio il visible false per tutti e li rendo invisibili
- *  ma non per quelli che corrispondono lettera per lettera 
- * 
- */
