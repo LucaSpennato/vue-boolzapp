@@ -186,7 +186,7 @@ const app = new Vue(
             cleanDate: function(element){
 
                 // TODO: Prova ad usare .filter (resituiva un array giusto?), forse alleggerisco il codice con questo!
-
+                // TODO: Metti i numeri in slice come elementi della funzione per poterla riutilizzare
                 let cleanedDate = element.slice(11,-3);
                 return cleanedDate;
             },
@@ -215,3 +215,30 @@ const app = new Vue(
         },
     },
 )
+/**
+ * !Idea ricerca
+ * creo la variabile che prenderà la stringa dal cerca
+ * creo una funzione dove prima tolgo gli spazi alla stringa
+ * metto tutti i caratteri in piccolo, rendo grande solo il primo 
+ * 
+ * itero in un for o se si può in un while
+ * cerco nell'array per nome, se il while mi restituisce un index allora uso il while
+ * 
+ * (se while, per non rendere infinito il ciclo
+ *  la condizione di uscita sarà quando hai fatto
+ *  scorrere tutta la lunghezza dell'array senza trovarlo)
+ * 
+ * se lo trova, cambio l'activeIndex con il numero dell'iterazione
+ * che dovrebbe corrispondere alla posizione del nome nell'array durante la ricerca (iterazione del ciclo)
+ * 
+ * essendo cambiato l'active la chat dovrebbe popparmi sulla destra
+ * ma come lo dico a sinistra?
+ * 
+ * dovrei in qualche modo dire alla condizione della classe nella lista laterale
+ * che ora il valore è diverso
+ * 
+ * 
+ * prendo l'iterazione associata all'array col cerca, 
+ * e creo un class con condizione indexRicerca (o se modifico activeElement prendo questo)
+ * e gli dico che {'active' : indexRicerca(o activeElement) === contactIndex}
+ */

@@ -5,12 +5,16 @@
 }
 
 /* common custom prop */
+/* TODO: prova con il linear gradient e rimuovi il position! 
+! da fare con più calma dopo aver sistemato e completato qualcosa in più in js*/
 body{
     background-color: var(--bgMain);
 }
 
 #app.main_wrapper{
     width: 100%;
+    min-width: 50rem;
+    min-height: 20rem;
     position: relative;
 }
 
@@ -20,9 +24,9 @@ body{
 }
 
 .main_wrapper > #screen-app{
-    min-height: 15rem;
+    /* min-height: 15rem; */
     max-height: 90vh;
-    height: 90vh;
+    /* height: 90vh; */
     position: absolute;
     top: 0;
     right: 50%;
@@ -77,7 +81,8 @@ img, i, .name, .cursor_pointer{
 /* TODO: OVERFLOW */
 #contacs_list{
     height: 50vh;
-    overflow-y: scroll; 
+    min-height: 10rem;
+    overflow-y: auto; 
 }
 
 /* right layout */
