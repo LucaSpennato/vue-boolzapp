@@ -212,11 +212,23 @@ const app = new Vue(
 
             botReply: function(){
 
+                let reply;
+                let message;
+                message = this.newMessage.toLowerCase();
+
+                if(message === 'ciao'){
+                    reply = 'Ciao!';
+                } else if(message === 'usciamo?'){
+                    reply = 'Non sto molto bene, scusami!';
+                } else{
+                    reply = 'Ok';
+                }
+
                 setTimeout(() =>{
 
                     this.contacts[this.activeElement].messages.push({
                         date: '10/01/2020 15:51:00',
-                        message:  'ok',
+                        message:  reply,
                         status: 'received',
                     });
 
