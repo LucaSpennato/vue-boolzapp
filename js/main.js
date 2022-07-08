@@ -264,6 +264,13 @@ const app = new Vue(
                     this.contacts[i].visible = true;
                 };
             },
+            
+            // timeNow: function(){
+            //     let minutesNow = dayjs().get('minute');
+            //     let secondsNow = dayjs().get('seconds');
+
+            //     return minutesNow + ':' + secondsNow; 
+            // }
         },
     },
 )
