@@ -68,7 +68,7 @@
                         <!-- search field -->
                         <div class="input-group p-2">
                             <button class="btn btn btn-secondary bg-light text-dark" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat">
+                            <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" v-model="search" @keyup="searchInput">
                           </div>
 
                         <!-- account lists -->

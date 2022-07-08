@@ -4,6 +4,7 @@ const app = new Vue(
         data:{
             activeElement: 0,
             newMessage: '',
+            search: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -229,8 +230,19 @@ const app = new Vue(
                     });
 
                 }, 1000);
-                
-            }
+            },
+
+            searchInput: function(){
+
+                let correctedSearch = this.stringAdjustment(this.search);
+                console.log(correctedSearch)
+            },
+
+            // return a string in lowercase w/first word capitalized
+            stringAdjustment: function(stringToAdj){
+                stringToAdj = stringToAdj.toLowerCase();
+                return stringToAdj.charAt(0).toUpperCase() + stringToAdj.slice(1);
+            },
 
         },
     },
@@ -252,7 +264,7 @@ const app = new Vue(
  *  scorrere tutta la lunghezza dell'array senza trovarlo)
  * 
  * !aggiungi la formattazzione delle stringhe, 
- * !usa il keayleave per azionare la ricerca ad ogni pressione
+ * !usa il keayup per azionare la ricerca ad ogni pressione
  * 
  * se lo trova, cambio l'activeIndex con il numero dell'iterazione
  * che dovrebbe corrispondere alla posizione del nome nell'array durante la ricerca (iterazione del ciclo)
@@ -271,4 +283,10 @@ const app = new Vue(
  * 
  * ! idea step-2 solo se funzia la ricerca, activeElement diventa 'searching', 
  * !facendo vedere solo determinate cose volendo
+ */
+
+/**
+ * keyup, alla ricerca con while cambio il visible false per tutti e li rendo invisibili
+ *  ma non per quelli che corrispondono lettera per lettera 
+ * 
  */
