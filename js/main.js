@@ -182,6 +182,8 @@ const app = new Vue(
 
             selectContactOnClick: function (contactIndex) {
                 this.activeElement = contactIndex;
+
+                this.cleanSearchInput();
             },
 
             cleanDate: function (element) {
@@ -244,16 +246,23 @@ const app = new Vue(
                 } else {
                     for(let i = 0;i < this.contacts.length; i++ ){
 
-                        let lower = this.contacts[i].name.toLowerCase();
-                        if(lower.includes(spacesCheck.toLowerCase())){
+                        let nameToLower = this.contacts[i].name.toLowerCase();
+                        if(nameToLower.includes(spacesCheck.toLowerCase())){
                             this.contacts[i].visible = true;
                         }else{
                             this.contacts[i].visible = false;
                         }
                     };
-
                 }
+            },
 
+            // this clean the search input, it have to be used in events
+            cleanSearchInput: function(){
+                this.search = '';
+
+                for(let i = 0; i < this.contacts.length; i++ ){
+                    this.contacts[i].visible = true;
+                };
             },
         },
     },

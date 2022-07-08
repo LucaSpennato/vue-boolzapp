@@ -129,7 +129,7 @@ img, i, .name, .cursor_pointer{
 }
 
 .received_message > div, .sent_message > div{
-    padding: 1rem;
+    padding: .5rem 1rem;
 }
 
 /* TODO: SCROLL */
