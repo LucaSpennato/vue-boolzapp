@@ -277,6 +277,9 @@ const app = new Vue(
                 let hoursNow = dayjs().get('hour');
                 let minutesNow = dayjs().get('minute');
                 let secondsNow = dayjs().get('seconds');
+                if(minutesNow < '10'){
+                    minutesNow = `0${minutesNow}`
+                }                
                 return `${hoursNow}:${minutesNow}:${secondsNow}`; 
             }
 
