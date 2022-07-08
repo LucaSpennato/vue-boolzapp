@@ -5,6 +5,7 @@ const app = new Vue(
             activeElement: 0,
             newMessage: '',
             search: '',
+            openedMess: -1,
             contacts: [
                 {
                     name: 'Michele',
@@ -272,6 +273,16 @@ const app = new Vue(
                 return this.cleanDate(array[array.length-1].date);
             },
 
+            optionsDropdown: function(arg){
+
+                if(this.openedMess !== arg){
+                this.openedMess = arg
+                // this.isOpen = true;
+                }else{
+                    this.openedMess = -1;
+                }
+            },
+
             timeNow: function(){
 
                 let hoursNow = dayjs().get('hour');
@@ -287,7 +298,7 @@ const app = new Vue(
                     secondsNow = `0${secondsNow}`;
                 };                 
                 return `${hoursNow}:${minutesNow}:${secondsNow}`; 
-            }
+            },
 
         },
     },

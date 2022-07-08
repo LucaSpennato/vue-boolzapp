@@ -123,11 +123,17 @@
                         <div id="current_contact_messages" class="p-5 d-flex flex-column">
 
                             <div
-                            v-for="singleMessage in contacts[activeElement].messages" 
+                            v-for="(singleMessage, index) in contacts[activeElement].messages" 
+                            @click="optionsDropdown(index)"
                             :class="{'sent_message' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received' }"
-                            class="d-flex flex-column justify-content-between mb-2">
+                            class="d-flex flex-column justify-content-between mb-2 position-relative">
                                 <div class="word_break_fix">
                                     {{ singleMessage.message }}
+                                </div>
+                                <div class="message_options p-0">
+                                    <div
+                                    :class="{'active_drop' : openedMess === index, 'openedMess' : openedMess !== index}">ciao</div>
+                                    <i class="fa-solid fa-chevron-down"></i>
                                 </div>
                                 <span class="message_time align-self-end m-1">
                                     {{ cleanDate(singleMessage.date) }}

@@ -132,10 +132,28 @@ img, i, .name, .cursor_pointer{
     padding: .5rem 1rem;
 }
 
+.message_options{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
 /* TODO: SCROLL */
 #current_contact_messages{
     min-height: 20rem;
     max-height: 34rem;
     height: 75vh;
     overflow-y: scroll;
+}
+
+.active_drop{
+
+    display: block;
+
+}
+
+.openedMess{
+
+    display: none;
+
 }
