@@ -201,7 +201,7 @@ const app = new Vue(
 
                 } else {
                     this.contacts[this.activeElement].messages.push({
-                        date: '10/01/2020 15:51:00',
+                        date: '10/01/2020 ' + this.timeNow(),
                         message: this.newMessage,
                         status: 'sent'
                     });
@@ -226,7 +226,7 @@ const app = new Vue(
                 setTimeout(() => {
 
                     this.contacts[this.activeElement].messages.push({
-                        date: '10/01/2020 15:51:00',
+                        date: '10/01/2020 '+ this.timeNow(),
                         message: reply,
                         status: 'received',
                     });
@@ -240,16 +240,16 @@ const app = new Vue(
                 if (spacesCheck.length === 0) {
                     // se ci sono solo spazi, magari tornando indietro
                     // pulisce resetta la ricerca mettendo tutti in true!!
-                    for(let i = 0;i < this.contacts.length; i++ ){
+                    for (let i = 0; i < this.contacts.length; i++) {
                         this.contacts[i].visible = true;
                     }
                 } else {
-                    for(let i = 0;i < this.contacts.length; i++ ){
+                    for (let i = 0; i < this.contacts.length; i++) {
 
                         let nameToLower = this.contacts[i].name.toLowerCase();
-                        if(nameToLower.includes(spacesCheck.toLowerCase())){
+                        if (nameToLower.includes(spacesCheck.toLowerCase())) {
                             this.contacts[i].visible = true;
-                        }else{
+                        } else {
                             this.contacts[i].visible = false;
                         }
                     };
@@ -257,20 +257,22 @@ const app = new Vue(
             },
 
             // this clean the search input, it have to be used in events
-            cleanSearchInput: function(){
+            cleanSearchInput: function () {
                 this.search = '';
 
-                for(let i = 0; i < this.contacts.length; i++ ){
+                for (let i = 0; i < this.contacts.length; i++) {
                     this.contacts[i].visible = true;
                 };
             },
-            
-            // timeNow: function(){
-            //     let minutesNow = dayjs().get('minute');
-            //     let secondsNow = dayjs().get('seconds');
 
-            //     return minutesNow + ':' + secondsNow; 
-            // }
+            timeNow: function(){
+
+                let hoursNow = dayjs().get('hour');
+                let minutesNow = dayjs().get('minute');
+                let secondsNow = dayjs().get('seconds');
+                return `${hoursNow}:${minutesNow}:${secondsNow}`; 
+            }
+
         },
     },
 )
