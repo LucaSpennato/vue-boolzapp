@@ -1,7 +1,7 @@
 const app = new Vue(
     {
         el: '#app',
-        data:{
+        data: {
             activeElement: 0,
             newMessage: '',
             search: '',
@@ -168,78 +168,102 @@ const app = new Vue(
                     ],
                 }
             ]
-            
-        },
-        methods:{
 
-            imageToGo: function(elementToGo){
+        },
+        methods: {
+
+            imageToGo: function (elementToGo) {
                 return './img/avatar' + elementToGo + '.jpg';
             },
 
-            altForImages: function(elementToGo){
+            altForImages: function (elementToGo) {
                 return 'avatar' + elementToGo;
             },
 
-            selectContactOnClick: function(contactIndex){
+            selectContactOnClick: function (contactIndex) {
                 this.activeElement = contactIndex;
             },
 
-            cleanDate: function(element){
+            cleanDate: function (element) {
 
                 // TODO: Prova ad usare .filter (resituiva un array giusto?), forse alleggerisco il codice con questo!
                 // TODO: Metti i numeri in slice come elementi della funzione per poterla riutilizzare
-                let cleanedDate = element.slice(11,-3);
+                let cleanedDate = element.slice(11, -3);
                 return cleanedDate;
             },
 
-            pushNewMessage: function(){
-  
-                let spacesCheck = this.newMessage.trim();
-                if( spacesCheck.length === 0){
+            pushNewMessage: function () {
 
-                } else{
+                let spacesCheck = this.newMessage.trim();
+                if (spacesCheck.length === 0) {
+
+                } else {
                     this.contacts[this.activeElement].messages.push({
                         date: '10/01/2020 15:51:00',
                         message: this.newMessage,
                         status: 'sent'
-                    }); 
+                    });
                     this.botReply();
                 }
                 this.newMessage = '';
             },
 
-            botReply: function(){
+            botReply: function () {
 
                 let reply;
                 let message = this.newMessage.toLowerCase();
-               
-                if(message === 'ciao' || message === 'ciao!'){
+
+                if (message === 'ciao' || message === 'ciao!') {
                     reply = 'Ciao!';
-                } else if(message === 'usciamo?'){
+                } else if (message === 'usciamo?') {
                     reply = 'Non sto molto bene, scusami!';
-                } else{
+                } else {
                     reply = 'Ok';
                 }
 
-                setTimeout(() =>{
+                setTimeout(() => {
 
                     this.contacts[this.activeElement].messages.push({
                         date: '10/01/2020 15:51:00',
-                        message:  reply,
+                        message: reply,
                         status: 'received',
                     });
 
                 }, 1000);
             },
 
-            searchInput: function(){
+            searchInput: function () {
 
-                let correctedSearch = this.stringAdjustment(this.search);
-                console.log(correctedSearch)
+                let spacesCheck = this.search.trim();
+                if (spacesCheck.length === 0){
+                } else {
+
+                    let correctedSearch = this.stringAdjustment(this.search);
+
+                    let isFound = false;
+                    let i = 0;
+
+                    while (isFound === false) {
+
+                        let wordToSearch = this.contacts[i].name.includes(correctedSearch);
+
+                        if (wordToSearch === true) {
+                            console.log('cè')
+                            isFound = true;
+                        } else {
+                            console.log('nope')
+                        }
+
+                        i++
+                    }
+
+                }
+
+
             },
 
             // return a string in lowercase w/first word capitalized
-            stringAdjustment: function(stringToAdj){
+            stringAdjustment: function (stringToAdj) {
                 stringToAdj = stringToAdj.toLowerCase();
                 return stringToAdj.charAt(0).toUpperCase() + stringToAdj.slice(1);
             },
