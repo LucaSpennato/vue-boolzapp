@@ -204,23 +204,23 @@ const app = new Vue(
                         message: this.newMessage,
                         status: 'sent'
                     }); 
-
-                    setTimeout(() =>{
-
-                        this.contacts[this.activeElement].messages.push({
-                            date: '10/01/2020 15:51:00',
-                            message:  'ok',
-                            status: 'received',
-                        });
-
-                    }, 1000);
-
+                    this.botReply();
                 }
 
                 this.newMessage = '';
             },
 
             botReply: function(){
+
+                setTimeout(() =>{
+
+                    this.contacts[this.activeElement].messages.push({
+                        date: '10/01/2020 15:51:00',
+                        message:  'ok',
+                        status: 'received',
+                    });
+
+                }, 1000);
                 
             }
 
