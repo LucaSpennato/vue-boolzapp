@@ -87,12 +87,14 @@
                                     <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
                                     <div class="d-flex flex-column">
                                         <div class="name">{{ contact.name }}</div>
-                                        <div>{{ latestMsg(contact.messages) }}</div>
+                                        <div>{{ latestInfo(contact.messages).message }}</div>
+                                        <!-- <div>{{ contact.messages[contact.messages.length - 1].message }}</div> -->
                                     </div>
                                 </div>
 
                                 <div class="message_time">
-                                    {{ latestDate(contact.messages) }}
+                                    <!-- {{ latestInfo(contact.messages).date }} -->
+                                    {{ cleanDate(latestInfo(contact.messages).date) }}
                                 </div>
                             </div>
 
@@ -106,9 +108,11 @@
                         <!-- top on click contact -->
                         <div class="p-2 focused_account d-flex justify-content-between">
 
+                            <!-- FIXME Rendi ogni card uguale, in realtà sono tutte identiche   -->
                             <div class="left_info d-flex align-items-center gap-2">
                                 <img :src="imageToGo(contacts[activeElement].avatar)" :alt="altForImages(contacts[activeElement].avatar)">
                                 <span class="name">{{ contacts[activeElement].name }}</span>
+                                <span>{{  latestAccess() }}</span>
                             </div>
 
                             <div class="right_info d-flex align-items-center gap-3 me-2 text-secondary">
@@ -131,16 +135,21 @@
                                     {{ singleMessage.message }}
                                 </div>
                                 <div class="message_options p-0">
+                                    <i class="fa-solid fa-chevron-down"></i>
                                     <div
-                                    :class="{'active_drop' : openedMess === index, 'openedMess' : openedMess !== index}">
+                                    :class="{'active_drop bg-light p-2 border border-dark border-2' : openedMess === index, 'openedMess' : openedMess !== index}">
                                 
-                                    <div @click="deleteMessage(index)">
+                                    <div  @click="deleteMessage(index)">
                                         Cancella
                                     </div>
 
+                                    <div  @click="showinfos(index)">
+                                        Mostra le info
                                     </div>
 
-                                    <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    
+
                                 </div>
                                 <span class="message_time align-self-end m-1">
                                     {{ cleanDate(singleMessage.date) }}

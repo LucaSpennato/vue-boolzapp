@@ -6,6 +6,8 @@ const app = new Vue(
             newMessage: '',
             search: '',
             openedMess: -1,
+            softDelete: true,
+            softDeleted: -1,
             contacts: [
                 {
                     name: 'Michele',
@@ -226,7 +228,7 @@ const app = new Vue(
                 setTimeout(() => {
 
                     this.contacts[this.activeElement].messages.push({
-                        date: '10/01/2020 '+ this.timeNow(),
+                        date: '10/01/2020 ' + this.timeNow(),
                         message: reply,
                         status: 'received',
                     });
@@ -265,48 +267,64 @@ const app = new Vue(
                 };
             },
 
-            latestMsg: function(array){             
-                return array[array.length-1].message;
+            latestInfo: function (array) {
+                return array[array.length - 1];
             },
 
-            latestDate: function(array){
-                return this.cleanDate(array[array.length-1].date);
-            },
+            // latestMsg: function (array) {
+            //     return array[array.length - 1];
+            // },
 
-            optionsDropdown: function(arg){
+            // latestDate: function (array) {
+            //     return this.cleanDate(array[array.length - 1].date);
+            // },
 
-                if(this.openedMess !== arg){
-                this.openedMess = arg;
-                }else{
+            optionsDropdown: function (index) {
+
+                if (this.openedMess !== index) {
+                    this.openedMess = index;
+                } else {
                     this.openedMess = -1;
                 }
-
-            },
-            
-            deleteMessage: function(index){
-
-                // !This work, but vue do not like when there is no 'message' to read in html
-                let ciao = this.contacts[this.activeElement].messages.splice(index,1);
-                console.log(ciao);
-
             },
 
-            timeNow: function(){
+            // FIXME// !This work, but vue do not like when there is no 'message' to read in html
+            deleteMessage: function (indexElement) {
+                let objectDeleted = this.contacts[this.activeElement].messages.splice(indexElement, 1);
+                console.log(objectDeleted);
+            },
+
+            showinfos(index) {
+                let objectDeleted = this.contacts[this.activeElement].messages.splice(indexElement, 1);
+            },
+
+            timeNow: function () {
 
                 let hoursNow = dayjs().get('hour');
                 let minutesNow = dayjs().get('minute');
                 let secondsNow = dayjs().get('seconds');
-                if( hoursNow < '10'){
-                    hoursNow= `0${hoursNow}`;
+                if (hoursNow < '10') {
+                    hoursNow = `0${hoursNow}`;
                 };
-                if(minutesNow < '10'){
+                if (minutesNow < '10') {
                     minutesNow = `0${minutesNow}`;
                 };
-                if(secondsNow < '10'){
+                if (secondsNow < '10') {
                     secondsNow = `0${secondsNow}`;
-                };                 
-                return `${hoursNow}:${minutesNow}:${secondsNow}`; 
+                };
+                return `${hoursNow}:${minutesNow}:${secondsNow}`;
             },
+
+            latestAccess: function(){
+
+                let arrayElement = this.latestInfo(this.contacts[this.activeElement].messages);
+
+                if(arrayElement.status === 'received'){
+                    return 'Ultimo accesso alle' + this.cleanDate(arrayElement.date);
+                }else{
+                    return 'Sta scrivendo...'   
+                }
+            }
 
         },
     },

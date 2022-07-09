@@ -132,11 +132,7 @@ img, i, .name, .cursor_pointer{
     padding: .5rem 1rem;
 }
 
-.message_options{
-    position: absolute;
-    right: 10px;
-    top: 5px;
-}
+
 
 /* TODO: SCROLL */
 #current_contact_messages{
@@ -146,14 +142,17 @@ img, i, .name, .cursor_pointer{
     overflow-y: scroll;
 }
 
+/* drop down on messageclick */
 .active_drop{
-
     display: block;
-
+}
+.openedMess{
+    display: none;
 }
 
-.openedMess{
-
-    display: none;
-
+.message_options{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    text-align: end;
 }
