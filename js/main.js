@@ -276,11 +276,19 @@ const app = new Vue(
             optionsDropdown: function(arg){
 
                 if(this.openedMess !== arg){
-                this.openedMess = arg
-                // this.isOpen = true;
+                this.openedMess = arg;
                 }else{
                     this.openedMess = -1;
                 }
+
+            },
+            
+            deleteMessage: function(index){
+
+                // !This work, but vue do not like when there is no 'message' to read in html
+                let ciao = this.contacts[this.activeElement].messages.splice(index,1);
+                console.log(ciao);
+
             },
 
             timeNow: function(){

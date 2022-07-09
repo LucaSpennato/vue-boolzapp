@@ -132,7 +132,14 @@
                                 </div>
                                 <div class="message_options p-0">
                                     <div
-                                    :class="{'active_drop' : openedMess === index, 'openedMess' : openedMess !== index}">ciao</div>
+                                    :class="{'active_drop' : openedMess === index, 'openedMess' : openedMess !== index}">
+                                
+                                    <div @click="deleteMessage(index)">
+                                        Cancella
+                                    </div>
+
+                                    </div>
+
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </div>
                                 <span class="message_time align-self-end m-1">
