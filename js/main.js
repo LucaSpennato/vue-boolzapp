@@ -6,8 +6,9 @@ const app = new Vue(
             newMessage: '',
             search: '',
             openedMess: -1,
-            infos: false,
+            messageToShowDate: false,
             messageToShow: '',
+            messageToShowStatus: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -303,12 +304,15 @@ const app = new Vue(
                 messageSoftDelete.message = '[Il messaggio è stato eliminato]';
             },
 
-            showinfos(elementInfos, index) {
-                console.log(elementInfos)
+            showInfos(elementInfos, index) {
+                this.messageToShowDate = elementInfos.date;
+                this.messageToShow = this.contacts[this.activeElement].messages[index].message;
+                this.messageToShowStatus = this.contacts[this.activeElement].messages[index].status;
+                console.log(this.messageToShowStatus);
+            },
 
-                this.infos = elementInfos.date;
-                this.messageToShow =this.contacts[this.activeElement].messages[index].message;
-                console.log(this.messageToShow);
+            closeInfos: function(){
+                this.messageToShowDate = false;
             },
 
             timeNow: function () {

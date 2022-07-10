@@ -116,20 +116,19 @@ img, i, .name, .cursor_pointer{
 }
 
 .received_message{
-    width: 40%;
+    width: 18rem;
     border-radius: .5rem;
     background-color: white;
 }
 
 .sent_message{
-    width: 40%;
+    width: 18rem;
     border-radius: .5rem;
     background-color: #D5F9BA;
-    align-self: flex-end;
 }
 
 .received_message > div, .sent_message > div{
-    padding: .5rem 1rem;
+    padding: 1rem 1rem;
 }
 
 /* TODO: SCROLL */
@@ -155,10 +154,20 @@ img, i, .name, .cursor_pointer{
     top: 5px;
     text-align: end;
     z-index: 1;
+    display: none;
+}
+
+.received_message:hover .message_options,
+.sent_message:hover .message_options{
+    display: block;
 }
 
 .message_drop{
     position: absolute;
     width: 8rem;
     right: 15px;
+}
+
+.single_message_info{
+    background-color: var(--bgfix-lightgray);
 }
