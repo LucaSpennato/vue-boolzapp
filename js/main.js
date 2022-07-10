@@ -6,6 +6,8 @@ const app = new Vue(
             newMessage: '',
             search: '',
             openedMess: -1,
+            infos: false,
+            messageToShow: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -298,8 +300,12 @@ const app = new Vue(
 
             },
 
-            showinfos(indexElement) {
-                // this.contacts[this.activeElement].messages.splice(indexElement, 1);
+            showinfos(elementInfos, index) {
+                console.log(elementInfos)
+
+                this.infos = elementInfos.date;
+                this.messageToShow =this.contacts[this.activeElement].messages[index].message;
+                console.log(this.messageToShow);
             },
 
             timeNow: function () {
@@ -323,12 +329,14 @@ const app = new Vue(
 
                 let arrayElement = this.latestInfo(this.contacts[this.activeElement].messages);
                 let date = this.cleanDate(arrayElement.date);
-
-                if(arrayElement.status === 'received'){
-                    return 'Ultimo accesso alle' + date;
+                let ciao;
+                if(arrayElement.status === 'received' || arrayElement.status === null){
+                    ciao = 'Ultimo accesso alle' + date;
                 }else{
-                    return 'Sta scrivendo...'   
+                    ciao ='Sta scrivendo...'   
                 }
+
+                return ciao
             }
 
         },

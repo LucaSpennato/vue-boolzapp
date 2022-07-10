@@ -37,7 +37,7 @@
             <div id="screen-app" class="container-lg">
 
                 <div class="row">
-                    
+
                     <!-- left side -->
                     <div class="col-4 bg-light px-0">
 
@@ -63,26 +63,27 @@
                             </div>
                             <div>
                                 <div class="fw-bold">Ricevi le notifiche di nuovi messaggi</div>
-                                <div class="text-decoration-underline text-secondary cursor_pointer">Attiva notifiche desktop</div>
+                                <div class="text-decoration-underline text-secondary cursor_pointer">Attiva notifiche
+                                    desktop</div>
                             </div>
                         </div>
 
                         <!-- search field -->
                         <div class="input-group p-2">
-                            <button class="btn btn btn-secondary bg-light text-dark" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" v-model="search" @keyup="searchInput">
-                          </div>
+                            <button class="btn btn btn-secondary bg-light text-dark" type="button"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat"
+                                v-model="search" @keyup="searchInput">
+                        </div>
 
                         <!-- account lists -->
                         <div id="contacs_list">
 
-                            <div
-                            v-for="(contact, contactIndex) in contacts"
-                            :class="{'selected_contact' : contactIndex === activeElement}"
-                            v-if="contact.visible"
-                            @click="selectContactOnClick(contactIndex)"
-                            class="contact border-top p-2 d-flex justify-content-between">
-            
+                            <div v-for="(contact, contactIndex) in contacts"
+                                :class="{'selected_contact' : contactIndex === activeElement}" v-if="contact.visible"
+                                @click="selectContactOnClick(contactIndex)"
+                                class="contact border-top p-2 d-flex justify-content-between">
+
                                 <div class="left_info d-flex align-items-center gap-2">
                                     <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
                                     <div class="d-flex flex-column">
@@ -103,16 +104,18 @@
                     </div>
 
                     <!-- right side -->
-                    <div id="chat_page" class="col-8 p-0 d-flex flex-column justify-content-between border-start border-2">
+                    <div id="chat_page"
+                        class="col-8 p-0 d-flex flex-column justify-content-between border-start border-2">
 
                         <!-- top on click contact -->
                         <div class="p-2 focused_account d-flex justify-content-between">
 
                             <!-- FIXME Rendi ogni card uguale, in realtà sono tutte identiche   -->
                             <div class="left_info d-flex align-items-center gap-2">
-                                <img :src="imageToGo(contacts[activeElement].avatar)" :alt="altForImages(contacts[activeElement].avatar)">
+                                <img :src="imageToGo(contacts[activeElement].avatar)"
+                                    :alt="altForImages(contacts[activeElement].avatar)">
                                 <span class="name">{{ contacts[activeElement].name }}</span>
-                                <span>{{  latestAccess() }}</span>
+                                <span>{{ latestAccess() }}</span>
                             </div>
 
                             <div class="right_info d-flex align-items-center gap-3 me-2 text-secondary">
@@ -126,42 +129,56 @@
                         <!-- messages wrapper -->
                         <div id="current_contact_messages" class="p-5 d-flex flex-column">
 
-                            <div
-                            v-for="(singleMessage, index) in contacts[activeElement].messages" 
-                            @click="optionsDropdown(index)"
-                            :class="{'sent_message' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received', 'd-none' : singleMessage.status === null} "     
-                            class="d-flex flex-column justify-content-between mb-2 position-relative">
+                            <div v-for="(singleMessage, index) in contacts[activeElement].messages"
+                                @click="optionsDropdown(index)"
+                                :class="{'sent_message' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received', 'd-none' : singleMessage.status === null} "
+                                class="d-flex flex-column justify-content-between mb-2 position-relative">
                                 <div class="word_break_fix">
                                     {{ singleMessage.message }}
                                 </div>
                                 <div class="message_options p-0">
                                     <i class="fa-solid fa-chevron-down"></i>
                                     <div
-                                    :class="{'active_drop bg-light p-2 border border-dark border-2' : openedMess === index, 'openedMess' : openedMess !== index}">
-                                
-                                    <div  @click="softDeleteMessage(singleMessage)">
-                                        Cancella
-                                    </div>
+                                        :class="{'active_drop bg-light p-1 border border-dark border-2' : openedMess === index, 'openedMess' : openedMess !== index}">
 
-                                    <div  @click="showinfos()">
-                                        Mostra le info
-                                    </div>
+                                        <div @click="deleteMessage(index)">
+                                            Cancella
+                                        </div>
+                                        <div @click="softDeleteMessage(singleMessage)">
+                                            Cancella solo per me
+                                        </div>
+
+                                        <div @click="showinfos(singleMessage, index)">
+                                            Mostra le informazioni
+                                        </div>
+                                        
 
                                     </div>
-                                    
-
                                 </div>
+                                
                                 <span class="message_time align-self-end m-1">
                                     {{ cleanDate(singleMessage.date) }}
                                 </span>
+                                
                             </div>
+                            
+                            <div class="align-self-center bg-light"
+                             :class="{'d-none' : infos === false}"
+                             @click="infos=false">
+                                {{ messageToShow }}
+                                {{ infos }}
+                            </div>
+                            
+                            
                         </div>
 
                         <!-- bottom message input -->
-                        <div id="my_message" class="d-flex p-2 justify-content-around align-items-center text-secondary">
+                        <div id="my_message"
+                            class="d-flex p-2 justify-content-around align-items-center text-secondary">
 
                             <i class="fa-regular fa-face-smile"></i>
-                            <input type="text" class="form-control w-75" placeholder="Scrivi un messaggio" v-model="newMessage" @keyUp.enter="pushNewMessage">
+                            <input type="text" class="form-control w-75" placeholder="Scrivi un messaggio"
+                                v-model="newMessage" @keyUp.enter="pushNewMessage">
                             <i class="fa-solid fa-microphone"></i>
 
                         </div>

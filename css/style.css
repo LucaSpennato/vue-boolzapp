@@ -155,4 +155,5 @@ img, i, .name, .cursor_pointer{
     right: 10px;
     top: 5px;
     text-align: end;
+    z-index: 1;
 }
