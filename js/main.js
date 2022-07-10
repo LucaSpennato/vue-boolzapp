@@ -336,14 +336,12 @@ const app = new Vue(
 
                 let arrayElement = this.latestInfo(this.contacts[this.activeElement].messages);
                 let date = this.cleanDate(arrayElement.date);
-                let ciao;
+                let accessMessage ='Online';
                 if(arrayElement.status === 'received' || arrayElement.status === false){
-                    ciao = 'Ultimo accesso alle' + date;
-                }else{
-                    ciao ='Sta scrivendo...'   
+                   accessMessage = 'Ultimo accesso alle' + date;
                 }
 
-                return ciao
+                return accessMessage;
             }
 
         },
