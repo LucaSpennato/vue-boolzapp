@@ -132,8 +132,6 @@ img, i, .name, .cursor_pointer{
     padding: .5rem 1rem;
 }
 
-
-
 /* TODO: SCROLL */
 #current_contact_messages{
     min-height: 20rem;
@@ -146,7 +144,8 @@ img, i, .name, .cursor_pointer{
 .active_drop{
     display: block;
 }
-.openedMess{
+
+.d_none_drop{
     display: none;
 }
 
@@ -156,4 +155,10 @@ img, i, .name, .cursor_pointer{
     top: 5px;
     text-align: end;
     z-index: 1;
+}
+
+.message_drop{
+    position: absolute;
+    width: 8rem;
+    right: 15px;
 }

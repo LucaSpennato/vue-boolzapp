@@ -289,15 +289,18 @@ const app = new Vue(
 
             
             // FIXME// !This work, but vue do not like when there is no 'message' to read in html
-            deleteMessage: function (indexElement) {
+            hardDeleteMessage: function (indexElement) {
                 let objectDeleted = this.contacts[this.activeElement].messages.splice(indexElement, 1);
                 console.log(objectDeleted);
             },
 
-            softDeleteMessage: function(index){
+            deleteMessage: function(messagetoDelete){
+                messagetoDelete.status = false;
+                messagetoDelete.message = '[Il messaggio è stato eliminato]';
+            },
 
-            index.status = null
-
+            softDeleteMessage: function(messageSoftDelete){
+                messageSoftDelete.message = '[Il messaggio è stato eliminato]';
             },
 
             showinfos(elementInfos, index) {
@@ -330,7 +333,7 @@ const app = new Vue(
                 let arrayElement = this.latestInfo(this.contacts[this.activeElement].messages);
                 let date = this.cleanDate(arrayElement.date);
                 let ciao;
-                if(arrayElement.status === 'received' || arrayElement.status === null){
+                if(arrayElement.status === 'received' || arrayElement.status === false){
                     ciao = 'Ultimo accesso alle' + date;
                 }else{
                     ciao ='Sta scrivendo...'   

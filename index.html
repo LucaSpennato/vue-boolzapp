@@ -88,7 +88,8 @@
                                     <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
                                     <div class="d-flex flex-column">
                                         <div class="name">{{ contact.name }}</div>
-                                        <div>{{ latestInfo(contact.messages).message }}</div>
+                                        <div :class="{'fst-italic' : latestInfo(contact.messages).message == '[Il messaggio è stato eliminato]'}">
+                                            {{ latestInfo(contact.messages).message }}</div>
                                         <!-- <div>{{ contact.messages[contact.messages.length - 1].message }}</div> -->
                                     </div>
                                 </div>
@@ -130,26 +131,29 @@
                         <div id="current_contact_messages" class="p-5 d-flex flex-column">
 
                             <div v-for="(singleMessage, index) in contacts[activeElement].messages"
+                                v-if="singleMessage.status"
                                 @click="optionsDropdown(index)"
-                                :class="{'sent_message' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received', 'd-none' : singleMessage.status === null} "
+                                :class="{'sent_message' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received'}"
                                 class="d-flex flex-column justify-content-between mb-2 position-relative">
                                 <div class="word_break_fix">
                                     {{ singleMessage.message }}
                                 </div>
                                 <div class="message_options p-0">
                                     <i class="fa-solid fa-chevron-down"></i>
-                                    <div
-                                        :class="{'active_drop bg-light p-1 border border-dark border-2' : openedMess === index, 'openedMess' : openedMess !== index}">
+                                    <div class="message_drop"
+                                        :class="{'active_drop bg-light p-1 border border-dark border-2' : openedMess === index, 'd_none_drop' : openedMess !== index}">
 
-                                        <div @click="deleteMessage(index)">
+                                        <div @click="deleteMessage(singleMessage)">
                                             Cancella
                                         </div>
-                                        <div @click="softDeleteMessage(singleMessage)">
-                                            Cancella solo per me
-                                        </div>
-
-                                        <div @click="showinfos(singleMessage, index)">
-                                            Mostra le informazioni
+                                        <div v-if="singleMessage.message !== '[Il messaggio è stato eliminato]'">
+                                            <div @click="softDeleteMessage(singleMessage)">
+                                                Elimina per me
+                                            </div>
+    
+                                            <div @click="showinfos(singleMessage, index)">
+                                                Info messaggio
+                                            </div>
                                         </div>
                                         
 
