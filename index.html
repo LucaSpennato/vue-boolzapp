@@ -129,7 +129,7 @@
                             <div
                             v-for="(singleMessage, index) in contacts[activeElement].messages" 
                             @click="optionsDropdown(index)"
-                            :class="{'sent_message' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received' }"
+                            :class="{'sent_message' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received', 'd-none' : singleMessage.status === null} "     
                             class="d-flex flex-column justify-content-between mb-2 position-relative">
                                 <div class="word_break_fix">
                                     {{ singleMessage.message }}
@@ -139,11 +139,11 @@
                                     <div
                                     :class="{'active_drop bg-light p-2 border border-dark border-2' : openedMess === index, 'openedMess' : openedMess !== index}">
                                 
-                                    <div  @click="deleteMessage(index)">
+                                    <div  @click="softDeleteMessage(singleMessage)">
                                         Cancella
                                     </div>
 
-                                    <div  @click="showinfos(index)">
+                                    <div  @click="showinfos()">
                                         Mostra le info
                                     </div>
 

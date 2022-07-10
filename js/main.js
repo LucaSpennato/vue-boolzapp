@@ -6,8 +6,6 @@ const app = new Vue(
             newMessage: '',
             search: '',
             openedMess: -1,
-            softDelete: true,
-            softDeleted: -1,
             contacts: [
                 {
                     name: 'Michele',
@@ -280,7 +278,6 @@ const app = new Vue(
             // },
 
             optionsDropdown: function (index) {
-
                 if (this.openedMess !== index) {
                     this.openedMess = index;
                 } else {
@@ -288,14 +285,21 @@ const app = new Vue(
                 }
             },
 
+            
             // FIXME// !This work, but vue do not like when there is no 'message' to read in html
             deleteMessage: function (indexElement) {
                 let objectDeleted = this.contacts[this.activeElement].messages.splice(indexElement, 1);
                 console.log(objectDeleted);
             },
 
-            showinfos(index) {
-                let objectDeleted = this.contacts[this.activeElement].messages.splice(indexElement, 1);
+            softDeleteMessage: function(index){
+
+            index.status = null
+
+            },
+
+            showinfos(indexElement) {
+                // this.contacts[this.activeElement].messages.splice(indexElement, 1);
             },
 
             timeNow: function () {
@@ -318,9 +322,10 @@ const app = new Vue(
             latestAccess: function(){
 
                 let arrayElement = this.latestInfo(this.contacts[this.activeElement].messages);
+                let date = this.cleanDate(arrayElement.date);
 
                 if(arrayElement.status === 'received'){
-                    return 'Ultimo accesso alle' + this.cleanDate(arrayElement.date);
+                    return 'Ultimo accesso alle' + date;
                 }else{
                     return 'Sta scrivendo...'   
                 }
