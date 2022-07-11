@@ -91,10 +91,14 @@
                                     <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
                                     <div class="d-flex flex-column">
                                         <div class="name">{{ contact.name }}</div>
+
                                         <!-- ! -->
-                                        <div
-                                            :class="{'fst-italic' : latestMessage(contact) === '[Il messaggio è stato eliminato]'}">
+                                        <div v-if="latestSoftDelete(contact) === false">
                                             {{ latestMessage(contact) }}
+                                        </div>
+                                        <div v-if="latestSoftDelete(contact)"
+                                        class="fst-italic">
+                                            Il messaggio è stato cancellato
                                         </div>
                                     </div>
                                 </div>
@@ -137,14 +141,26 @@
                         <!-- messages wrapper -->
                         <div id="current_contact_messages" class="py-5 d-flex flex-column">
 
-                            <div v-for="(singleMessage, index) in contacts[activeElement].messages"
-                                v-if="singleMessage.status" @click="optionsDropdown(index)" :class="{
+                            <div 
+                                v-for="(singleMessage, index) in contacts[activeElement].messages"
+                                v-if="singleMessage.status" 
+                                @click="optionsDropdown(index)"
+                                @mouseleave="mouseleave"
+                                :class="{
                                     'sent_message align-self-md-end' : singleMessage.status === 'sent',
                                     'received_message' : singleMessage.status === 'received'}"
                                 class="d-flex flex-column justify-content-between mb-2 mx-md-5 position-relative">
 
-                                <div class="word_break_fix">
+                                <div 
+                                v-if="singleMessage.isSoftDeleted === false"
+                                class="word_break_fix">
                                     {{ singleMessage.message }}
+                                </div>
+
+                                <div
+                                v-else="singleMessage.isSoftDeleted"
+                                class="fst-italic">
+                                    Il messaggio è stato cancellato
                                 </div>
 
                                 <span class="message_time align-self-end m-1">
@@ -154,15 +170,17 @@
                                 <!-- options dropdown -->
                                 <div class="message_options p-0">
                                     <i class="fa-solid fa-chevron-down"></i>
-                                    <div class="message_drop" :class="{
+                                    <div class="message_drop" 
+                                         :class="{
                                             'd-block bg-light p-1 border border-dark border-2' : openedMess === index,
-                                            'd-none' : openedMess !== index}">
+                                            'd-none' : openedMess === false}">
 
                                         <div @click="hardDeleteMessage(index)">
                                             Cancella
                                         </div>
+
                                         <!-- ! -->
-                                        <div v-if="singleMessage.message !== '[Il messaggio è stato eliminato]'">
+                                        <div v-if="singleMessage.isSoftDeleted === false">
                                             <div @click="softDeleteMessage(singleMessage)">
                                                 Elimina per me
                                             </div>
@@ -199,7 +217,8 @@
                     </div>
 
                     <!-- single message infos display -->
-                    <div class="single_message_info col-4" :class="{'d-none' : isInfoOpen === false}"
+                    <div class="single_message_info col-4" 
+                        :class="{'d-none' : isInfoOpen === false}"
                         v-if="messageInfoIndex !== null">
 
                         <i class="fa-solid fa-arrow-left p-3 fs-2" @click="closeInfos"></i>
