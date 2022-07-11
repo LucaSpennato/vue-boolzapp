@@ -204,7 +204,7 @@ const app = new Vue(
 
                 } else {
                     this.contacts[this.activeElement].messages.push({
-                        date: '10/01/2020 ' + this.timeNow(),
+                        date: this.nowTime(),
                         message: this.newMessage,
                         status: 'sent'
                     });
@@ -229,7 +229,7 @@ const app = new Vue(
                 setTimeout(() => {
 
                     this.contacts[this.activeElement].messages.push({
-                        date: '10/01/2020 ' + this.timeNow(),
+                        date: this.nowTime(),
                         message: reply,
                         status: 'received',
                     });
@@ -273,7 +273,7 @@ const app = new Vue(
             },
 
             // latestMsg: function (array) {
-            //     return array[array.length - 1];
+            //     return array[array.length - 1].name;
             // },
 
             // latestDate: function (array) {
@@ -308,28 +308,14 @@ const app = new Vue(
                 this.messageToShowDate = elementInfos.date;
                 this.messageToShow = this.contacts[this.activeElement].messages[index].message;
                 this.messageToShowStatus = this.contacts[this.activeElement].messages[index].status;
-                console.log(this.messageToShowStatus);
             },
 
             closeInfos: function(){
                 this.messageToShowDate = false;
             },
 
-            timeNow: function () {
-
-                let hoursNow = dayjs().get('hour');
-                let minutesNow = dayjs().get('minute');
-                let secondsNow = dayjs().get('seconds');
-                if (hoursNow < '10') {
-                    hoursNow = `0${hoursNow}`;
-                };
-                if (minutesNow < '10') {
-                    minutesNow = `0${minutesNow}`;
-                };
-                if (secondsNow < '10') {
-                    secondsNow = `0${secondsNow}`;
-                };
-                return `${hoursNow}:${minutesNow}:${secondsNow}`;
+            nowTime: function(){
+                return moment().format("DD/MM/YYYY hh:mm:ss");
             },
 
             latestAccess: function(){
@@ -348,4 +334,9 @@ const app = new Vue(
     },
 )
 
-// TODO: Ricorda di aggiungere la libreria delle date!!!!
+/* per hard delete, per farlo funzionare usa un
+v-if dove se non ci sta nulla nell'arrray, fa vedere altro!! */
+// tipo, v-if array.length uguale o minore a qualcosa, fermete
+
+
+
