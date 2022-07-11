@@ -112,8 +112,8 @@
                     <!-- right side -->
 
                     <div id="chat_page" :class="{
-                            'col-8' : messageToShowDate === false,
-                            'col-4' : messageToShowDate !== false}"
+                            'col-8' : isInfoOpen === false,
+                            'col-4' : isInfoOpen !== false}"
                         class="p-0 d-flex flex-column justify-content-between border-start border-2">
 
                         <!-- top on click contact -->
@@ -169,7 +169,7 @@
                                                 Elimina per me
                                             </div>
 
-                                            <div @click="showInfos(singleMessage, index)">
+                                            <div @click="showInfos(index)">
                                                 Info messaggio
                                             </div>
                                         </div>
@@ -200,14 +200,16 @@
                         </div>
                     </div>
 
-                    <div class="single_message_info col-4" :class="{'d-none' : messageToShowDate === false}">
+                    <div class="single_message_info col-4" :class="{'d-none' : isInfoOpen === false}">
+                        
                         <i class="fa-solid fa-arrow-left p-3 fs-2" @click="closeInfos"></i>
-                        <div class="p-3 my-3"
-                            :class="{'sent_message' : messageToShowStatus === 'sent', 'received_message' : messageToShowStatus === 'received'}">
+                        <div class="p-3 my-3 text-dark" @click="messageToShow()">
+                            <!-- :class="{'sent_message' : messageToShowStatus === 'sent', 'received_message' : messageToShowStatus === 'received'}" -->
+                            <!-- {{ messageToShow() }} -->
                             {{ messageToShow }}
                         </div>
                         <div class="p-3 ">
-                            Inviato il: {{ messageToShowDate }}
+                            <!-- Inviato il: {{ messageToShowDate }} -->
                         </div>
                     </div>
                 </div>

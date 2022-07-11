@@ -6,9 +6,11 @@ const app = new Vue(
             newMessage: '',
             search: '',
             openedMess: -1,
-            messageToShowDate: false,
-            messageToShow: '',
-            messageToShowStatus: '',
+            isInfoOpen: false,
+            messaggio: '',
+            // messageToShow: '',
+            // messageToShowStatus: '',
+            messageInfoIndex: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -189,6 +191,7 @@ const app = new Vue(
             },
 
             cleanDate: function (element) {
+                // usa split
                 return element.slice(11, -3);
             },
 
@@ -281,6 +284,7 @@ const app = new Vue(
                 return moment().format("DD/MM/YYYY hh:mm:ss");
             },
 
+            // !
             latestMessage: function (array) {         
                 let messages = array.messages;
                 if(messages.length > 0){
@@ -307,19 +311,29 @@ const app = new Vue(
                 messageSoftDelete.message = '[Il messaggio è stato eliminato]';
             },
 
-            showInfos(elementInfos, index) {
-
-                let shortCut = this.contacts[this.activeElement].messages[index];
-                this.messageToShowDate = elementInfos.date;
-                console.log(elementInfos)
-                console.log(this.messageToShow);
-                this.messageToShow = shortCut.message;
-                console.log(this.messageToShow)
-                this.messageToShowStatus = shortCut.status;
+            // !
+            showInfos(index) {
+                this.isInfoOpen = true;
+                this.messageInfoIndex = index;
+                console.log(this.messageInfoIndex);
+                 
+                
+                
+                // let shortCut = this.contacts[this.activeElement].messages[index];
+                // this.messageToShowDate = elementInfos.date;
+                // this.messageToShow = shortCut.message;
+                // this.messageToShowStatus = shortCut.status;
+            },
+            
+            messageToShow: function(){
+                
+                let shortCut = this.contacts[this.activeElement].messages[this.messageInfoIndex];
+                console.log(shortCut.message)
+                return shortCut.message;
             },
 
             closeInfos: function () {
-                this.messageToShowDate = false;
+                this.isInfoOpen = false;
             },
 
         },
