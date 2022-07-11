@@ -20,8 +20,8 @@
 
     <!-- Moment.js library 2.29 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-    crossorigin="anonymous"></script>
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous"></script>
 
     <title>Boolzapp</title>
 
@@ -91,16 +91,13 @@
                                     <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
                                     <div class="d-flex flex-column">
                                         <div class="name">{{ contact.name }}</div>
-                                        <div
-                                            :class="{'fst-italic' : latestInfo(contact.messages).message == '[Il messaggio è stato eliminato]'}">
-                                            {{ latestInfo(contact.messages).message }}</div>
-                                        <!-- <div>{{ contact.messages[contact.messages.length - 1].message }}</div> -->
+                                        <!-- <div :class="{'fst-italic' : latestInfo(contact.messages).message == '[Il messaggio è stato eliminato]'}"> -->
+                                        <div> {{ latestMessage(contact) }}</div>
                                     </div>
                                 </div>
 
                                 <div class="message_time">
-                                    <!-- {{ latestInfo(contact.messages).date }} -->
-                                    {{ cleanDate(latestInfo(contact.messages).date) }}
+                                    {{ cleanDate(latestDate(contact)) }}
                                 </div>
                             </div>
 
@@ -111,7 +108,7 @@
                     <!-- right side -->
 
                     <div id="chat_page"
-                    :class="{'col-8' : messageToShowDate === false, 'col-4' : messageToShowDate !== false}"
+                        :class="{'col-8' : messageToShowDate === false, 'col-4' : messageToShowDate !== false}"
                         class="p-0 d-flex flex-column justify-content-between border-start border-2">
 
                         <!-- top on click contact -->
@@ -122,7 +119,7 @@
                                 <img :src="imageToGo(contacts[activeElement].avatar)"
                                     :alt="altForImages(contacts[activeElement].avatar)">
                                 <span class="name">{{ contacts[activeElement].name }}</span>
-                                <span>{{ latestAccess() }}</span>
+                                <!-- <span>{{ latestAccess() }}</span> -->
                             </div>
 
                             <div class="right_info d-flex align-items-center gap-3 me-2 text-secondary">
@@ -137,42 +134,47 @@
                         <div id="current_contact_messages" class="py-5 d-flex flex-column">
 
                             <div v-for="(singleMessage, index) in contacts[activeElement].messages"
-                                v-if="singleMessage.status" @click="optionsDropdown(index)"
-                                :class="{'sent_message align-self-md-end' : singleMessage.status === 'sent', 'received_message' : singleMessage.status === 'received'}"
+                                v-if="singleMessage.status" @click="optionsDropdown(index)" 
+                                :class="{
+                                        'sent_message align-self-md-end' : singleMessage.status === 'sent', 
+                                        'received_message' : singleMessage.status === 'received'
+                                    }"
                                 class="d-flex flex-column justify-content-between mb-2 mx-md-5 position-relative">
                                 <div class="word_break_fix">
                                     {{ singleMessage.message }}
-                                </div>
-
-                                <!-- options dropdown -->
-                                <div class="message_options p-0">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                    <div class="message_drop"
-                                        :class="{'active_drop bg-light p-1 border border-dark border-2' : openedMess === index, 'd_none_drop' : openedMess !== index}">
-
-                                        <div @click="deleteMessage(singleMessage)">
-                                            Cancella
-                                        </div>
-                                        <div v-if="singleMessage.message !== '[Il messaggio è stato eliminato]'">
-                                            <div @click="softDeleteMessage(singleMessage)">
-                                                Elimina per me
-                                            </div>
-
-                                            <div @click="showInfos(singleMessage, index)">
-                                                Info messaggio
-                                            </div>
-                                        </div>
-
-                                    </div>
                                 </div>
 
                                 <span class="message_time align-self-end m-1">
                                     {{ cleanDate(singleMessage.date) }}
                                 </span>
 
+                                <!-- options dropdown -->
+                                <div class="message_options p-0">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    <div class="message_drop" :class="{'active_drop bg-light p-1 border border-dark border-2' : openedMess === index, 
+                                        'd_none_drop' : openedMess !== index}">
+
+                                        <div @click="hardDeleteMessage(index)">
+                                            Cancella
+                                        </div>
+                                        <!-- <div v-if="singleMessage.message !== '[Il messaggio è stato eliminato]'"> -->
+                                        <div @click="softDeleteMessage(singleMessage)">
+                                            Elimina per me
+                                        </div>
+
+                                        <div @click="showInfos(singleMessage, index)">
+                                            Info messaggio
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
 
+
+
                         </div>
+                        <!-- <div v-else="contacts[activeElement].messages.length === 0" class="text-center bg-success w-75 align-self-center text-white">ciao</div> -->
+
 
                         <!-- bottom message input -->
                         <div id="my_message"
@@ -184,29 +186,28 @@
                             <i class="fa-solid fa-microphone"></i>
 
                         </div>
-
-
                     </div>
+                </div>
 
-                    <div class="single_message_info col-4" :class="{'d-none' : messageToShowDate === false}">
-                        <i class="fa-solid fa-arrow-left p-3 fs-2" @click="closeInfos"></i>
-                        <div class="p-3 my-3"
+                <div class="single_message_info col-4" :class="{'d-none' : messageToShowDate === false}">
+                    <i class="fa-solid fa-arrow-left p-3 fs-2" @click="closeInfos"></i>
+                    <div class="p-3 my-3"
                         :class="{'sent_message' : messageToShowStatus === 'sent', 'received_message' : messageToShowStatus === 'received'}">
-                            {{ messageToShow }}
-                        </div>
-                        <div class="p-3 ">
-                            Inviato il: {{ messageToShowDate }}
-                        </div>
+                        {{ messageToShow }}
                     </div>
-
+                    <div class="p-3 ">
+                        Inviato il: {{ messageToShowDate }}
+                    </div>
                 </div>
 
             </div>
 
         </div>
 
+        </div>
+
     </main>
-    
+
     <script type="text/javascript" src="./js/main.js"></script>
 </body>
 
