@@ -7,10 +7,9 @@ const app = new Vue(
             search: '',
             openedMess: -1,
             isInfoOpen: false,
-            messaggio: '',
             // messageToShow: '',
             // messageToShowStatus: '',
-            messageInfoIndex: '',
+            messageInfoIndex: null,
             contacts: [
                 {
                     name: 'Michele',
@@ -315,26 +314,27 @@ const app = new Vue(
             showInfos(index) {
                 this.isInfoOpen = true;
                 this.messageInfoIndex = index;
-                console.log(this.messageInfoIndex);
-                 
-                
-                
-                // let shortCut = this.contacts[this.activeElement].messages[index];
-                // this.messageToShowDate = elementInfos.date;
-                // this.messageToShow = shortCut.message;
-                // this.messageToShowStatus = shortCut.status;
-            },
-            
-            messageToShow: function(){
-                
-                let shortCut = this.contacts[this.activeElement].messages[this.messageInfoIndex];
-                console.log(shortCut.message)
-                return shortCut.message;
             },
 
             closeInfos: function () {
                 this.isInfoOpen = false;
             },
+            
+            messageToShow: function(){
+                let shortCut = this.contacts[this.activeElement].messages[this.messageInfoIndex];
+                return shortCut.message;
+
+            },
+
+            messageStatus: function(){
+                let shortCut = this.contacts[this.activeElement].messages[this.messageInfoIndex];
+                return shortCut.status;
+            }, 
+            
+            messageDate: function(){
+                let shortCut = this.contacts[this.activeElement].messages[this.messageInfoIndex];
+                return shortCut.date;
+            }, 
 
         },
     },
