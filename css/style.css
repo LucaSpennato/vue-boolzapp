@@ -116,13 +116,15 @@ img, i, .name, .cursor_pointer{
 }
 
 .received_message{
-    width: 18rem;
+    width: 40%;
+    min-width: 13rem;
     border-radius: .5rem;
     background-color: white;
 }
 
 .sent_message{
-    width: 18rem;
+    width: 40%;
+    min-width: 13rem;
     border-radius: .5rem;
     background-color: #D5F9BA;
 }
@@ -140,14 +142,6 @@ img, i, .name, .cursor_pointer{
 }
 
 /* drop down on messageclick */
-.active_drop{
-    display: block;
-}
-
-.d_none_drop{
-    display: none;
-}
-
 .message_options{
     position: absolute;
     right: 10px;

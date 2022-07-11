@@ -185,15 +185,11 @@ const app = new Vue(
 
             selectContactOnClick: function (contactIndex) {
                 this.activeElement = contactIndex;
-
                 this.cleanSearchInput();
             },
 
             cleanDate: function (element) {
-
-                // TODO: Metti i numeri in slice come elementi della funzione per poterla riutilizzare
-                let cleanedDate = element.slice(11, -3);
-                return cleanedDate;
+                return element.slice(11, -3);
             },
 
             pushNewMessage: function () {
@@ -275,40 +271,15 @@ const app = new Vue(
                 }
             },
 
-            deleteMessage: function (messagetoDelete) {
-                messagetoDelete.status = false;
-                // messagetoDelete.message = '[Il messaggio è stato eliminato]';
-            },
+            // deleteMessage: function (messagetoDelete) {
+            //     messagetoDelete.status = false;
+            //     messagetoDelete.message = '[Il messaggio è stato eliminato]';
+            // },
 
-            softDeleteMessage: function (messageSoftDelete) {
-                // messageSoftDelete.message = '[Il messaggio è stato eliminato]';
-            },
-
-            showInfos(elementInfos, index) {
-                this.messageToShowDate = elementInfos.date;
-                // this.messageToShow = this.contacts[this.activeElement].messages[index].message;
-                // this.messageToShowStatus = this.contacts[this.activeElement].messages[index].status;
-            },
-
-            closeInfos: function () {
-                this.messageToShowDate = false;
-            },
 
             nowTime: function () {
                 return moment().format("DD/MM/YYYY hh:mm:ss");
             },
-
-            // latestAccess: function () {
-
-            // let arrayElement = this.latestInfo(this.contacts[this.activeElement].messages);
-            //     let date = this.cleanDate(arrayElement.date);
-            //     let accessMessage = 'Online';
-            //     if (arrayElement.status === 'received' || arrayElement.status === false) {
-            //         accessMessage = 'Ultimo accesso alle' + date;
-            //     }
-
-            //     return accessMessage;
-            // },
 
             latestMessage: function (array) {         
                 let messages = array.messages;
@@ -328,18 +299,27 @@ const app = new Vue(
                 }
             },
 
-            // FIXME// !This work, but vue do not like when there is no 'message' to read in html
             hardDeleteMessage: function (indexElement) {
-                let objectDeleted = this.contacts[this.activeElement].messages.splice(indexElement, 1);
-                console.log(objectDeleted);
-           
-                    // this.latestMessage;
-                    // this.latestDate;
-                
+                this.contacts[this.activeElement].messages.splice(indexElement, 1);
+            },
 
-                /* per hard delete, per farlo funzionare usa un
-                v-if dove se non ci sta nulla nell'arrray, fa vedere altro!! */
-                // tipo, v-if array.length uguale o minore a qualcosa, fermete
+            softDeleteMessage: function (messageSoftDelete) {
+                messageSoftDelete.message = '[Il messaggio è stato eliminato]';
+            },
+
+            showInfos(elementInfos, index) {
+
+                let shortCut = this.contacts[this.activeElement].messages[index];
+                this.messageToShowDate = elementInfos.date;
+                console.log(elementInfos)
+                console.log(this.messageToShow);
+                this.messageToShow = shortCut.message;
+                console.log(this.messageToShow)
+                this.messageToShowStatus = shortCut.status;
+            },
+
+            closeInfos: function () {
+                this.messageToShowDate = false;
             },
 
         },
