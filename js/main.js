@@ -211,8 +211,8 @@ const app = new Vue(
             },
 
             cleanDate: function (element) {
-                // usa split
-                return element.slice(11,-3);
+                let date = element.split(" ");
+                return date[1]
             },
 
             pushNewMessage: function () {
