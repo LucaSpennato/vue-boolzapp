@@ -212,7 +212,7 @@ const app = new Vue(
 
             cleanDate: function (element) {
                 // usa split
-                return element.slice(11, -3);
+                return element.slice(11,-3);
             },
 
             pushNewMessage: function () {
@@ -251,6 +251,7 @@ const app = new Vue(
                         date: this.nowTime(),
                         message: reply,
                         status: 'received',
+                        isSoftDeleted: false,
                     });
 
                 }, 1000);
@@ -333,6 +334,7 @@ const app = new Vue(
                 this.contacts[this.activeElement].messages.splice(indexElement, 1);
                 this.messageInfoIndex = null;
                 this.isInfoOpen = false;
+                this.openedMess= false
             },
 
             softDeleteMessage: function (messageSoftDelete) {
