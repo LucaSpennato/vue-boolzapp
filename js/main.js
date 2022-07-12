@@ -216,9 +216,7 @@ const app = new Vue(
             pushNewMessage: function () {
 
                 let spacesCheck = this.newMessage.trim();
-                if (spacesCheck.length === 0) {
-
-                } else {
+                if (spacesCheck.length !== 0) {
                     this.contacts[this.activeElement].messages.push({
                         date: this.nowTime(),
                         message: this.newMessage,
@@ -226,7 +224,7 @@ const app = new Vue(
                         isSoftDeleted: false,
                     });
                     this.botReply();
-                }
+                };
                 this.newMessage = '';
             },
 
@@ -258,13 +256,6 @@ const app = new Vue(
             searchInput: function () {
 
                 let spacesCheck = this.search.trim();
-                if (spacesCheck.length === 0) {
-                    // se ci sono solo spazi, magari tornando indietro
-                    // pulisce resetta la ricerca mettendo tutti in true!!
-                    for (let i = 0; i < this.contacts.length; i++) {
-                        this.contacts[i].visible = true;
-                    }
-                } else {
                     for (let i = 0; i < this.contacts.length; i++) {
 
                         let nameToLower = this.contacts[i].name.toLowerCase();
@@ -274,16 +265,11 @@ const app = new Vue(
                             this.contacts[i].visible = false;
                         }
                     };
-                }
             },
 
             // this clean the search input, it have to be used in events
             cleanSearchInput: function () {
-                this.search = '';
-
-                for (let i = 0; i < this.contacts.length; i++) {
-                    this.contacts[i].visible = true;
-                };
+                this.searchInput();
             },
 
             optionsDropdown: function (index) {
