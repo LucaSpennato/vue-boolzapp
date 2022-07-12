@@ -7,8 +7,6 @@ const app = new Vue(
             search: '',
             openedMess: false,
             isInfoOpen: false,
-            // messageToShow: '',
-            // messageToShowStatus: '',
             messageInfoIndex: null,
             contacts: [
                 {
@@ -334,11 +332,12 @@ const app = new Vue(
                 this.contacts[this.activeElement].messages.splice(indexElement, 1);
                 this.messageInfoIndex = null;
                 this.isInfoOpen = false;
-                this.openedMess= false
+                this.openedMess = false;
             },
 
             softDeleteMessage: function (messageSoftDelete) {
                 messageSoftDelete.isSoftDeleted = true; 
+                this.isInfoOpen = false;
             },
 
             showInfos(index) {

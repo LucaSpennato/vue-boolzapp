@@ -5,8 +5,6 @@
 }
 
 /* common custom prop */
-/* TODO: prova con il linear gradient e rimuovi il position! 
-! da fare con più calma dopo aver sistemato e completato qualcosa in più in js*/
 body{
     background-color: var(--bgMain);
 }
@@ -24,17 +22,12 @@ body{
 }
 
 .main_wrapper > #screen-app{
-    /* min-height: 15rem; */
+    min-height: 15rem;
     max-height: 90vh;
-    /* height: 90vh; */
     position: absolute;
     top: 0;
     right: 50%;
     transform: translate(50%, 5%);
-}
-
-.main_wrapper > #screen-app > .row{
-    height: 100%;
 }
 
 img{
@@ -50,26 +43,25 @@ img, i, .name, .cursor_pointer{
     cursor: pointer;
 }
 
-.focused_account{
-    height: 3rem;
-    background-color: var(--bgfix-lightgray);
-}
-
 .left_info > img{
     border-radius: 50%;
     object-fit: cover;
 }
 
 /* left layout */
-.contact{
+.account_card{
     height: 3.5rem;
 }
 
-.contact .left_info div:first-child{
+.focused_account{
+    background-color: var(--bgfix-lightgray);
+}
+
+.account_card .left_info div:first-child{
     font-weight: 500;
 }
 
-.contact .left_info .flex-column div:last-child, .message_time{
+.messages_display, .message_time{
     color: gray;
     font-size: .7rem;
 }
@@ -78,9 +70,8 @@ img, i, .name, .cursor_pointer{
     background-color: lightgray;
 }
 
-/* TODO: OVERFLOW */
 #contacs_list{
-    height: 50vh;
+    height: 60vh;
     min-height: 10rem;
     overflow-y: auto; 
 }
@@ -99,10 +90,10 @@ img, i, .name, .cursor_pointer{
 #my_message i{
     font-size: 1.4rem;
 }
-
-#notifications{
+.bg_lightblue_fix{
     background-color: #8EDAFC;
 }
+
 #bell-container{
     border-radius: 50%;
     display: flex;
@@ -129,11 +120,6 @@ img, i, .name, .cursor_pointer{
     background-color: #D5F9BA;
 }
 
-.received_message > div, .sent_message > div{
-    padding: 1rem 1rem;
-}
-
-/* TODO: SCROLL */
 #current_contact_messages{
     min-height: 20rem;
     max-height: 34rem;

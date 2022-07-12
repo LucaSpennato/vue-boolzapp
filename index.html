@@ -45,7 +45,8 @@
                     <div class="col-4 bg-light px-0">
 
                         <!-- top card account -->
-                        <div id="my_account" class="p-2 focused_account d-flex justify-content-between">
+                        <div 
+                        class="p-2 focused_account account_card d-flex justify-content-between">
 
                             <div class="left_info d-flex align-items-center gap-2">
                                 <img src="./img/avatar_io.jpg" alt="my_account">
@@ -60,14 +61,15 @@
                         </div>
 
                         <!-- notifications -->
-                        <div id="notifications" class="p-3 d-flex justify-content-start gap-3">
+                        <div class="bg_lightblue_fix  p-3 d-flex justify-content-start gap-3">
                             <div id="bell-container">
                                 <i class="fa-solid fa-bell-slash"></i>
                             </div>
                             <div>
                                 <div class="fw-bold">Ricevi le notifiche di nuovi messaggi</div>
-                                <div class="text-decoration-underline text-secondary cursor_pointer">Attiva notifiche
-                                    desktop</div>
+                                <div class="text-decoration-underline text-secondary cursor_pointer">
+                                    Attiva notifiche desktop
+                                </div>
                             </div>
                         </div>
 
@@ -85,18 +87,17 @@
                             <div v-for="(contact, contactIndex) in contacts"
                                 :class="{'selected_contact' : contactIndex === activeElement}" v-if="contact.visible"
                                 @click="selectContactOnClick(contactIndex)"
-                                class="contact border-top p-2 d-flex justify-content-between">
+                                class="account_card border-top p-2 d-flex justify-content-between">
 
                                 <div class="left_info d-flex align-items-center gap-2">
                                     <img :src="imageToGo(contact.avatar)" :alt="altForImages(contact.avatar)">
                                     <div class="d-flex flex-column">
                                         <div class="name">{{ contact.name }}</div>
 
-                                        <!-- ! -->
-                                        <div v-if="latestSoftDelete(contact)" class="fst-italic">
+                                        <div v-if="latestSoftDelete(contact)" class="fst-italic messages_display">
                                             Il messaggio è stato cancellato
                                         </div>
-                                        <div v-else>
+                                        <div v-else class="messages_display">
                                             {{ latestMessage(contact) }}
                                         </div>
                                     </div>
@@ -112,21 +113,23 @@
                     </div>
 
                     <!-- right side -->
-
-                    <div id="chat_page" :class="{
+                    <div id="chat_page" 
+                    :class="{
                             'col-8' : isInfoOpen === false,
                             'col-4' : isInfoOpen !== false}"
-                        class="p-0 d-flex flex-column justify-content-between border-start border-2">
+                    class="p-0 d-flex flex-column justify-content-between border-start border-2">
 
                         <!-- top on click contact -->
-                        <div class="p-2 focused_account d-flex justify-content-between">
+                        <div class="focused_account account_card p-2 d-flex justify-content-between">
 
-                            <!-- FIXME Rendi ogni card uguale, in realtà sono tutte identiche   -->
+                            <!-- selected account on top -->
                             <div class="left_info d-flex align-items-center gap-2">
                                 <img :src="imageToGo(contacts[activeElement].avatar)"
-                                    :alt="altForImages(contacts[activeElement].avatar)">
-                                <span class="name">{{ contacts[activeElement].name }}</span>
-                                <span>Ultimo accesso alle 12.00</span>
+                                     :alt="altForImages(contacts[activeElement].avatar)">
+                                <div class="d-flex flex-column">
+                                    <div class="name">{{ contacts[activeElement].name }}</div>
+                                    <div class="messages_display">Ultimo accesso alle 12.00</div>
+                                </div>
                             </div>
 
                             <div class="right_info d-flex align-items-center gap-3 me-2 text-secondary">
@@ -140,24 +143,35 @@
                         <!-- messages wrapper -->
                         <div id="current_contact_messages" class="py-5 d-flex flex-column">
 
+                            <!-- message wrapper -->
                             <div v-for="(singleMessage, index) in contacts[activeElement].messages"
-                                v-if="singleMessage.status" @click="optionsDropdown(index)" @mouseleave="mouseleave"
+                                v-if="singleMessage.status" 
+                                @click="optionsDropdown(index)"
+                                @mouseleave="mouseleave"
                                 :class="{
                                     'sent_message align-self-md-end' : singleMessage.status === 'sent',
                                     'received_message' : singleMessage.status === 'received'}"
-                                class="d-flex flex-column justify-content-between mb-2 mx-md-5 position-relative">
+                                class="position-relative mb-2 mx-md-5">
 
-                                <div v-if="singleMessage.isSoftDeleted === false" class="word_break_fix">
-                                    {{ singleMessage.message }}
+                                <div class="d-flex flex-column justify-content-between"
+                                    v-if="singleMessage.isSoftDeleted === false">
+
+                                    <!-- message  -->
+                                    <div class="word_break_fix p-3">
+                                        {{ singleMessage.message }}
+                                    </div>
+
+                                    <!-- date -->
+                                    <span class="message_time align-self-end m-1">
+                                        {{ cleanDate(singleMessage.date) }}
+                                    </span>
+
                                 </div>
 
-                                <div v-else="singleMessage.isSoftDeleted === true" class="fst-italic">
+                                <div v-else="singleMessage.isSoftDeleted === true" class="fst-italic py-2 p-3">
                                     Il messaggio è stato cancellato
                                 </div>
 
-                                <span class="message_time align-self-end m-1">
-                                    {{ cleanDate(singleMessage.date) }}
-                                </span>
 
                                 <!-- options dropdown -->
                                 <div class="message_options p-0">
@@ -170,7 +184,6 @@
                                             Cancella
                                         </div>
 
-                                        <!-- ! -->
                                         <div v-if="singleMessage.isSoftDeleted === false">
                                             <div @click="softDeleteMessage(singleMessage)">
                                                 Elimina per me
@@ -193,8 +206,6 @@
 
                         </div>
 
-
-
                         <!-- bottom message input -->
                         <div id="my_message"
                             class="d-flex p-2 justify-content-around align-items-center text-secondary">
@@ -208,14 +219,19 @@
                     </div>
 
                     <!-- single message infos display -->
-                    <div class="single_message_info col-4" :class="{'d-none' : isInfoOpen === false}"
+                    <div class="single_message_info col-4" 
+                        :class="{'d-none' : isInfoOpen === false}"
                         v-if="messageInfoIndex !== null">
 
                         <i class="fa-solid fa-arrow-left p-3 fs-2" @click="closeInfos"></i>
-                        <div class="p-3 my-3 text-dark" @click="messageToShow()"
-                            :class="{'sent_message' : messageStatus() === 'sent', 'received_message' : messageStatus() === 'received'}">
+                        <div class="p-3 my-3 text-dark" 
+                            @click="messageToShow()"
+                            :class="{
+                                'sent_message' : messageStatus() === 'sent',
+                                'received_message' : messageStatus() === 'received'}">
                             {{ messageToShow() }}
                         </div>
+
                         <div class="p-3 ">
                             Inviato il: {{ messageDate() }}
                         </div>
@@ -223,12 +239,6 @@
                 </div>
 
             </div>
-
-
-        </div>
-
-        </div>
-
         </div>
 
     </main>
